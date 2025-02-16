@@ -4,10 +4,14 @@ using MiniEtl.Excel.Schemas;
 
 namespace MiniEtl.Excel
 {
-    public class MiniEtlExcelService(IJsonService jsonService) : IMiniEtlService<MiniEtlExcelResponse>
+    public class MiniEtlExcelService : IMiniEtlService<MiniEtlExcelResponse>
     {
-        private readonly IJsonService _jsonService = jsonService;
+        private readonly IJsonService _jsonService;
 
+        public MiniEtlExcelService(IJsonService jsonService)
+        {
+            _jsonService = jsonService ?? throw new ArgumentNullException(nameof(jsonService));
+        }
         public MiniEtlExcelResponse Extract(string sourceConnection)
         {
             try
@@ -25,15 +29,12 @@ namespace MiniEtl.Excel
                     return MiniEtlExcelResponse.Failure(error);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                return MiniEtlExcelResponse.Failure(Error.Create("MiniEtl.Excel.Extract", e.Message, e));
             }
             
-           
-
-            throw new NotImplementedException();
         }
     }
 }
