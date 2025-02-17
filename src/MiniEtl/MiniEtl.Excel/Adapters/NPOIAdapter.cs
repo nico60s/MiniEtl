@@ -15,10 +15,11 @@ namespace MiniEtl.Excel.Adapters
         {
             throw new NotImplementedException();
         }
-        internal static NPOIAdapter CreateAdapter(string jsonFilePath) => new(jsonFilePath);
-        private void LoadWorkBookk(string jsonFilePath) { 
-        
-            _workbook = new XSSFWorkbook(jsonFilePath);
+        public static IExcelAdapter CreateAdapter(string jsonFilePath) => new(jsonFilePath);
+        private void LoadWorkBookk(string jsonFilePath) {
+
+            using var fs = new FileStream(jsonFilePath, FileMode.Create, FileAccess.Write);
+            _workbook = new XSSFWorkbook(fs);
         }
     }
 }

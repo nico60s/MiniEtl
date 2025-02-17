@@ -11,15 +11,16 @@ namespace MiniEtl.Excel.Models
         private readonly Dictionary<string, Sheet> _sheets = []; 
         private readonly IExcelAdapter _excelAdapter;
 
-        private WorkBook(MiniEtlExcelExtractSchema schema)
+        private WorkBook(MiniEtlExcelExtractSchema schema, IExcelAdapter adapter)
         {
             _schema = schema ?? throw new ArgumentNullException(nameof(schema)); 
-            _excelAdapter = NPOIAdapter.CreateAdapter(schema.FileName)
+            _excelAdapter = adapter
                 ?? throw new InvalidOperationException("Error creando el adaptador NPOI"); 
             CreateSheets();
         }
 
-        internal static WorkBook Create(MiniEtlExcelExtractSchema schema) => new(schema);
+        internal static WorkBook Create(MiniEtlExcelExtractSchema schema, IExcelAdapter adapter) 
+            => new(schema, adapter);
 
         public Table GetTable(string sheetName, string tableName)
         {

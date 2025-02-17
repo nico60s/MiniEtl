@@ -16,6 +16,7 @@ namespace MiniEtl.Excel
             services.AddScoped<IMiniEtlService<MiniEtlExcelResponse>, MiniEtlExcelService>();
             services.AddSingleton<IMiniEtlResponse<WorkBook>, MiniEtlExcelResponse>();
             services.AddSingleton<IMiniEtlExcelExtractSchema, MiniEtlExcelExtractSchema>();
+            services.AddScoped<IExcelAdapter, NPOIAdapter>();
             return services;
         }
     }
