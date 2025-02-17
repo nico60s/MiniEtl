@@ -5,7 +5,7 @@ namespace MiniEtl.Excel.Adapters
 {
     internal class NPOIAdapter : IExcelAdapter
     {
-        public Table GetTable(string sheetName, string tablePosition)
+        public Table GetTable(string sheetName, TableSpecification tableSpecification)
         {
             throw new NotImplementedException();
         }

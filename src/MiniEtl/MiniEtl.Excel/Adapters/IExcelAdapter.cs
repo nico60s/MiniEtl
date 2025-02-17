@@ -4,6 +4,6 @@ namespace MiniEtl.Excel.Adapters
 {
     internal interface IExcelAdapter
     {
-        Table GetTable(string sheetName, string tablePosition);
+        Table GetTable(string sheetName, TableSpecification tableSpecification);
     }
 }

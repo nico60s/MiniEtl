@@ -15,11 +15,16 @@ namespace MiniEtl.Common
                 var schema = JsonConvert.DeserializeObject<IModuleSchema>(json);
                 return MiniEtlCommonResponse<IModuleSchema>.Success(schema); 
             }
-            catch (Exception e)
+            catch (JsonException e)
+            {
+                return MiniEtlCommonResponse<IModuleSchema>.Failed(
+                    Error.Create("C0001", "Error en parseo de archivo Json", e));
+            }
+            catch (IOException e)
             {
 
                 return MiniEtlCommonResponse<IModuleSchema>.Failed(
-                    Error.Create("C0001","Error en parseo de archivo Json",e));
+                    Error.Create("C0002",$"Error al leer {jsonPath}",e));
             }
            
         }
