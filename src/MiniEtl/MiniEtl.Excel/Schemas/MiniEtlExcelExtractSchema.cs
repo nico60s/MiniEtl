@@ -12,7 +12,7 @@ namespace MiniEtl.Excel.Schemas
     public record MiniEtlExcelSheetSchema
     {
         public string SheetName { get; init; }
-        public List<MiniEtlExcelTableSchema> Table { get; init; }
+        public List<MiniEtlExcelTableSchema> Tables { get; init; }
     }
     public record MiniEtlExcelTableSchema
     {
